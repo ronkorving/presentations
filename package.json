@@ -1,0 +1,10 @@
+{
+  "name": "presentations",
+  "version": "1.0.0",
+  "description": "Wizcorp presentations",
+  "author": "Wizcorp Inc.",
+  "license": "MIT",
+  "dependencies": {
+    "reveal.js": "^3.5.0"
+  }
+}
