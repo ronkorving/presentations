@@ -1,0 +1,470 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Getting the most out of Open Source</title>
+
+	<link rel="stylesheet" href="../../node_modules/reveal.js/css/reveal.css">
+	<link rel="stylesheet" href="../../node_modules/reveal.js/css/theme/black.css">
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="../../node_modules/reveal.js/lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ?
+			'../../node_modules/reveal.js/css/print/pdf.css' :
+			'../../node_modules/reveal.js/css/print/paper.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+</head>
+<body>
+
+<div class="reveal">
+	<!--
+	Press S for the speaker view
+	Press F for full screen
+	-->
+
+	<div class="slides">
+		<section>
+			<p>エンジニア寄せ鍋 - July 14, 2017</p>
+
+			<h2>Go Open Source!!</h2>
+			<h3>~ 使うだけじゃないopen source ~</h3>
+
+			<p>登壇者： Ron Korving</p>
+			<p>
+				<small>
+					code: https://github.com/ronkorving<br/>
+					twitter: https://twitter.com/ronkorving
+				</small>
+			</p>
+
+			<aside class="notes" data-markdown="">
+				- C++ / PHP background (back in the day).
+				- Serious JavaScript user for about 10 years.
+				- Node.js user for about 5 years.
+
+				Today: how we can leverage Open Source and get you everyone to become kick-ass contributors to
+				projects we care about most.
+			</aside>
+		</section>
+
+		<section data-background="assets/cat-paw.jpg" data-background-position="top">
+			手を上げて下さい．
+
+			<aside class="notes" data-markdown="">
+				- Q: Who use Open Source software?
+				- Q: Who has successfully made a code contribution to an Open Source project?
+
+				Goal is to get all of you to raise your hands when asked that question.
+			</aside>
+		</section>
+
+		<section>
+			もともと，ソースコードの共有は当たり前だった
+
+			<aside class="notes" data-markdown="">
+				The perceived value was in hardware, until Microsoft realized that software had huge potential
+				as an industry. They were right.
+			</aside>
+		</section>
+
+		<section data-background="assets/gpl.jpg">
+			<aside class="notes" data-markdown="">
+				The Open Source movement sought to protect the culture of sharing.
+				The GNU Public License is one of the legal ways by which they have achieved this.
+			</aside>
+		</section>
+
+		<section data-background="assets/angry-linus.png">
+			<aside class="notes" data-markdown="">
+				We owe a lot of the existence of Open Source today to friendly people like this guy.
+			</aside>
+		</section>
+
+		<section data-background="assets/saint-rms.jpg">
+			<aside class="notes" data-markdown="">
+				And religious figures like this guy.
+			</aside>
+		</section>
+
+		<section data-background="assets/why-dont-we-contribute.jpg" data-background-size="contain">
+			<aside class="notes" data-markdown="">
+				With all that Open Source around, being used by many of us on a daily basis, I find myself
+				wondering why we don't contribute more. We owe so much to this movement, why aren't more people
+				an active part of it?
+			</aside>
+		</section>
+
+		<section>
+			<h4>オープンソースしていない理由</h4>
+			<ul>
+				<li>エンジニアのデバッグの方法</li>
+				<li>社内のリーダー達のソフトウェアへの理解</li>
+			</ul>
+
+			<aside class="notes" data-markdown="">
+				The main reasons I've identified are the way we debug our code, and a lack of understanding
+				software and engineering by the leadership of most of the companies we work at.
+			</aside>
+		</section>
+
+		<section>
+			<h4>エンジニアのデバッグの方法</h4>
+			<ul>
+				<li>私のバグではありません．そのライブラリーが壊れているんです<br>
+					（時にそれは正しいが，大抵は間違っている）</li>
+				<li>
+					なんとなく済ませていませんか？
+					<ol>
+						<li>Google / Stack Overflow!</li>
+						<li>とりあえずの回避策→技術的負債に繋がる(T_T) </li>
+						<li>... 良い結果を産まない...</li>
+					</ol>
+				</li>
+			</ul>
+
+			<aside class="notes" data-markdown="">
+				Let's start with how we debug our code. When we hit a wall, this ^ is what tends to happen.
+			</aside>
+		</section>
+
+		<section>
+			<p>回避策がないなら...</p>
+
+			「お客様，申し訳ございませんが<br>
+			これは実現できません．不可能です．．．<br>
+			専門家の私が言うので間違いありません」
+
+			<aside class="notes" data-markdown="">
+				- "Not possible" or "Very expensive".
+				- Like they know any better, right?
+				- This is bad for business.
+	   		</aside>
+		</section>
+
+		<section>
+			<p>ソフトウェア開発者とは、<br>
+			本来，問題解決者であることを意味します。</p>
+			<p>私たちが問題を解決しなければ、<br>
+			他の誰が解決をしますか？</p>
+
+			<aside class="notes" data-markdown="">
+				Sadly, sometimes we forget this.
+			</aside>
+		</section>
+
+		<section data-background="assets/root-cause.jpg">
+			<aside class="notes" data-markdown="">
+				The real solution is to get to the root cause of our problem.
+				Stock photo guy knows what's up.
+			</aside>
+		</section>
+
+		<section>
+			<p>問題の根源に到達することは、<br>
+			掘削していくことです</p>
+			<ol>
+				<li>私のコードが問題なのか？<br>
+				 (だいたいはこれが原因)</li>
+				<li>使っているライブラリーやフレームワークが<br>
+				問題なのか？（諦めちゃダメ〜）</li>
+				<li>Node.jsの問題か，依存関係の問題か？<br>
+				（諦めちゃイヤ〜）</li>
+				<li>JavaScriptのランタイムの問題か？<br>
+				（レアケースだけど0%ではないよね）</li>
+			</ol>
+			<p>落ち着けば大丈夫</p>
+
+			<aside class="notes" data-markdown="">
+				Getting to the root of the problem, is quite literally an exercise in digging. At our company,
+				I really push for people to go through these steps one by one, and not give up until the root
+				cause of the problem has been identified. This can be scary, but it is totally worth it.
+			</aside>
+		</section>
+
+		<section data-background="assets/bug-report.jpg">
+			<h2>バグを報告しよう！</h2>
+		</section>
+
+		<section>
+			<ul>
+				<li>バグを報告する責任があります</li>
+				<li>アナタは間違えているかもしれない</li>
+				<li>間違っていると、ドキュメントの不備やAPIデザインの不具合が発見される可能性があります</li>
+			</ul>
+
+			<aside class="notes" data-markdown="">
+				Authors want to know about your problems so they can improve the library for you, themselves and
+				others. Keep in mind that library authors can often have tunnel vision about the product they're
+				working on. That can make your feedback invaluable.
+			</aside>
+		</section>
+
+		<section>
+			でも納期は迫っている！
+
+			<aside class="notes" data-markdown="">
+				I understand you would be worried about your deadlines. Reporting a bug tells you nothing about
+				when you will be able to deliver your blocked feature.
+			</aside>
+		</section>
+
+		<section>
+			自分で直して，プルリクエストを出そう．
+
+			<aside class="notes" data-markdown="">
+				- Fancy developers are just people.
+				- Have confidence in your own abilities.
+				- Jump into the project with confidence, debug your butt off, you will succeed.
+				- Because existing contributors will often gladly help you when you get stuck (they will see a
+				  potential new contributor in you).
+			</aside>
+		</section>
+
+		<section>
+			<h4>オープンソースのバグを積極的に修正すると(1/2)</h4>
+
+			<ul>
+				<li>適切なレビューを受ける事が出来るため、修正したプログラムが確実に動作する</li>
+				<li>もし修正したプログラムがマージされなくても，あなたはそのプログラムを使うことは出来ます(だから納期には間に合う)</li>
+				<li>あなたにとって大切なソフトウェアのコミュニティメンバーになれます</li>
+			</ul>
+
+			<aside class="notes" data-markdown="">
+				- Ensures the fix works, as it will receive proper review.
+				- Will give you a public branch to continue to work from (deadline safe).
+				- Become a member of a community around software in which you have a vested interest.</li>
+
+				That last point is especially important to me. As a community, if you can save a ton of people
+				the effort of debugging the same issue, by spending 4 hours on a pull request yourself, you will
+				save a lot of man-hours. I call that pretty productive. "Work smart, not hard", right?<br>
+				When we acknowledge that our interests align, this should be the obvious course. Our bosses may
+				not always recognise it, but in an open source world, all developers are co-workers. We're in
+				this together.
+			</aside>
+		</section>
+
+		<section>
+			<h4>オープンソースのバグを積極的に修正すると(2/2)</h4>
+
+			<ul>
+				<li>あなたのデバックスキルが向上します</li>
+				<li>そのソフトウェアのパフォーマンスの<br>
+				引き出し方に詳しくなれます</li>
+				<li>あなたがバクを修正することで<br>
+				世界中のエンジニアの役に立ちます</li>
+			</ul>
+
+			<aside class="notes" data-markdown="">
+				- Improves debugging of your own software.
+				- Improves understanding of performance bottlenecks.
+				- Prevents others from wasting time.
+
+				That last point is especially important to me. As a community, if you can save a ton of people
+				the effort of debugging the same issue, by spending 4 hours on a pull request yourself, you will
+				save a lot of man-hours. I call that pretty productive. "Work smart, not hard", right?<br>
+				When we acknowledge that our interests align, this should be the obvious course. Our bosses may
+				not always recognise it, but in an open source world, all developers are co-workers. We're in
+				this together.
+			</aside>
+		</section>
+
+		<section>
+			社内のリーダー達による，ソフトウェアへの理解
+		</section>
+
+		<section data-background="assets/dilbert-open-source.gif" data-background-size="contain">
+			<aside class="notes">
+				Dilbert is a bit tongue-in-cheek, but this is in essence what a lot of companies do in practice.
+			</aside>
+		</section>
+
+		<section>
+			<h4>問題の本質的な解決をするためには，仕事に自由が必要です</h4>
+
+			<p>
+				もしあなたのリーダーが，<br>
+				エンジニアのオープンソースへ参加のメリットを理解していないのであれば，<br>
+				あなたの仕事環境には問題があり，<br>
+				その改善要求をするか，<br>
+				またはあなたのリーダーを教育するべきです<br>
+				私はそう信じています。
+			</p>
+
+			<aside class="notes" data-markdown="">
+								When your leaders fail to understand the real benefits of Open Source to your work, I believe
+				your work environment has a serious flaw and you should demand better. Educate your leaders.
+				
+				Now if you're lucky and you work for a company where Open Source is already valued for what it
+				is, awesome. But if that's not the case for you, inform your leaders and push for change.
+			</aside>
+		</section>
+
+		<section>
+			<h4>あなたのソフトウェアをオープンソースしましょう</h4>
+
+			<p>常に自分に問いただしましょう:</p>
+			<p>
+				公開することは本当にあなたの会社に<br>
+				不利益を生みますか?そうじゃないなら,<br>
+				 オープンソースしましょうよ?
+			</p>
+
+			<ul>
+				<li>みんなからの修正は0コストでしょ? いいね！</li>
+				<li>みんなから信頼されるよ! GitHubはあなたとあなたの会社のアピールになります。</li>
+			</ul>
+
+			<aside class="notes" data-markdown="">
+				Open Source your own software
+				Always ask yourself:
+				Does sharing this really create a competitive disadvantage to us?
+				If not, why not Open Source it?
+
+　　　　　　　　　　Contributions at zero cost? Yes please.
+				Street cred! GitHub is a portfolio for yourself and your company.
+
+			</aside>
+		</section>
+
+		<section>
+			<h4>The Wizcorp Pull Request challenge</h4>
+
+			<ul>
+				<li>GitとGitHubの基礎知識は必要</li>
+				<li>応募者のプロジェクトでのコミュケーションのやり方を知ることができる</li>
+				<li>応募者の問題解決能力を知ることができる</li>
+				<li>もし採用しなくても，応募者はその能力を残すことができる</li>
+				<li>面接の時に意味のないプログラミングテストがいらない</li>
+			</ul>
+
+			<aside class="notes" data-markdown="">
+				- At Wizcorp we have really made Open Source part of our DNA. And we even apply it to hiring.
+				- Explain the PR challenge.
+				- Explain advantages (on screen).
+				<li>Requires applicants to know some Git and GitHub basics.</li>
+				<li>Shows us how applicants communicate with other people on a project.</li>
+				<li>Shows us an applicant's problem solving skills.</li>
+				<li>Allows applicants to show off their skills even when we don't hire.</li>
+				<li>No silly programming tests in an interview room.</li>
+
+			</aside>
+		</section>
+
+		<section  data-background="assets/psyched.gif">
+			<h2>コントリビュートしたくなったよね？</h2>
+		</section>
+
+		<section>
+			<h4>Some tips</h4>
+
+			<ul>
+				<li>多くのプロジェクトにはコントリビュートの方法が書かれています．読みましょう！</li>
+				<li>多くのプロジェクトには行動規範があります．それに従い，行動する事が大切です</li>
+				<li>たとえ他の人の行動がふさわしくないと思った時でも、あなたの寛大さは重要です</li>
+				<li>相手のプロジェクトのスタイルを壊してはいけません</li>
+			</ul>
+
+			<aside class="notes" data-markdown="">
+				- Code of Conduct: It protects you and others working on the project.
+				- Code style: When you visit a friend’s house, you don’t start redecorating their home, right?
+				  Treat a project’s code the same, some people are spending their whole days in there.
+			</aside>
+		</section>
+
+		<section>
+			<h4>コントリビューションしやすい場所</h4>
+
+			<ul>
+				<li>Documentation</li>
+				<li>Unit tests</li>
+				<li>Benchmarks</li>
+			</ul>
+
+			<aside class="notes" data-markdown="">
+				If you're a bit scared to get into a particular project and want to familiarize yourself with it
+				a bit more first, these are 3 ways to add value to the project without having mastered it. Users
+				are often better at writing documentation than the code authors themselves. And in the process,
+				you will understand the code base more and more, and will be able to start contributing code.
+			</aside>
+		</section>
+
+		<section>
+			<h4>Don't know where to start?</h4>
+
+			<p>Help wanted!</p>
+
+			<ul>
+				<li>Node.js and Electron modules that have compiled parts.</li>
+				<li>PhoneGap plugins which share both JS and Java/ObjC.</li>
+			</ul>
+
+			<aside class="notes" data-markdown="">
+				If you have some time to spare and want to help out, there are many libraries that mix languages
+				which can make it hard to find people to contribute. The mix of languages can scare people away
+				from contributing. But if you're a polyglot and are comfortable around multiple environments,
+				this category of libraries could really use your help.
+			</aside>
+		</section>
+
+		<section>
+			<h4>今日のトークのおさらい</h4>
+			<small>眠ってしまったアナタの為に</small>
+
+			<ul>
+				<li>問題の本質にたどり着くまで続けよう</li>
+				<li>すべてのエンジニアが一つのチームになろう</li>
+				<li>オープンソースに貢献するために，<br>
+				仕事に柔軟性を求めよう</li>
+				<li>バグレポートとオープンソースへの貢献に<br>
+				自信を持ってください</li>
+				<li>採用プロセスに関わっている場合は、Wizcorp PRチャレンジを利用してみてください<br>
+				（私たちの特許ではありません，安心して）</li>
+			</ul>
+		</section>
+
+		<section>
+			<h4>Q&amp;A</h4>
+			<small>時間があれば．．．</small>
+
+			<aside class="notes" data-markdown="">
+				Please feel free to come talk with me about Open Source, JavaScript or Node in general, or
+				how to become a Node.js contributor yourself.
+			</aside>
+		</section>
+
+		<section>
+			<h4>Thank you very much and see you on GitHub!</h4>
+			<h4>ありがとうございました！<br>
+			 GitHubで会いましょう！！！</h4>
+		</section>
+	</div>
+</div>
+
+<script src="../../node_modules/reveal.js/lib/js/head.min.js"></script>
+<script src="../../node_modules/reveal.js/js/reveal.js"></script>
+
+<script>
+	// More info about config & dependencies:
+	// - https://github.com/hakimel/reveal.js#configuration
+	// - https://github.com/hakimel/reveal.js#dependencies
+	Reveal.initialize({
+		dependencies: [
+			{ src: '../../node_modules/reveal.js/plugin/markdown/marked.js' },
+			{ src: '../../node_modules/reveal.js/plugin/markdown/markdown.js' },
+			{ src: '../../node_modules/reveal.js/plugin/notes/notes.js', async: true },
+			{ src: '../../node_modules/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+		]
+	});
+</script>
+
+</body>
+</html>
