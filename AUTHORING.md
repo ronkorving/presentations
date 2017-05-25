@@ -1,17 +1,30 @@
 # Content authoring
 
-All presentation libraries we use should be added to package.json as a dependency. In the `/presentations` folder,
-you can add your presentation. Please codify as follows `YYYYMMDD Name of presentation (Name of event)`.
-The date refers to when the presentation was given.
+## Workflow
 
-Name the entrypoint to your presentation `index.html`.
+### Locally hosted presentations
 
-Please put all assets (images, etc) from your presentation in a subfolder called `assets`.
+1. Add any dependencies your presentation may depend on to `package.json`.
+2. Please codify your presentation folder name as follows `YYYYMMDD Name of presentation (Name of event)`. The date
+   refers to the day when the presentation was given.
+3. Author your presentation in `./index.html` in your presentation folder.
+4. Put all assets (images, etc) from your presentation in a subfolder `./assets`.
+5. You may add more information to your presentation by adding a `info.json` file to your folder.
+6. After any changes, run `npm run build` to update `index.html` of the root of this repository to include all
+   information about your presentation. Make sure no errors happened.
 
-You are encouraged to add a README.md file to your presentation's folder, which could reference a conference or meet-up
-website where you gave your presentation.
+### Externally hosted presentations
 
-Example structure:
+1. Please codify your presentation folder name as follows `YYYYMMDD Name of presentation (Name of event)`. The date
+   refers to the day when the presentation was given.
+2. Add more information (at least the external URL) to your presentation by adding a `info.json` file to your folder.
+3. After any changes, run `npm run build` to update `index.html` of the root of this repository to include all
+   information about your presentation. Make sure no errors happened.
+
+
+## Structure and Syntax
+
+### Folder structure
 
 ```
 /node_modules
@@ -19,14 +32,33 @@ Example structure:
 		...
 /presentations
 	/20170501 How to make a great presentation (Global Presentation Summit)
-		/README.md
 		/index.html
+		/info.json
 		/assets
 			/using-comic-sans.jpg
 			/the-bulletpoint-song.mp3
 ```
 
-## Reveal.js presentations
+### info.json structure
+
+All fields are optional.
+
+```json
+{
+	"url": "URL to the presentation IF externally hosted",
+	"speaker": {
+		"name": "Name of the speaker"
+	},
+	"event": {
+		"url": "URL to the event page"
+	}
+}
+```
+
+
+## Using presentation tools
+
+### Reveal.js
 
 When you add your presentation, you copy and use `node_modules/reveal.js/index.html` as a basis. Keep in mind however
 that all URLs in that file will not point to the right location. You must prefix all CSS and JavaScript links with

@@ -4,7 +4,13 @@
   "description": "Wizcorp presentations",
   "author": "Wizcorp Inc.",
   "license": "MIT",
+  "scripts": {
+    "build": "./scripts/generate-html/index.js"
+  },
   "dependencies": {
     "reveal.js": "^3.5.0"
+  },
+  "devDependencies": {
+    "handlebars": "^4.0.10"
   }
 }
