@@ -5,12 +5,13 @@
   "author": "Wizcorp Inc.",
   "license": "MIT",
   "scripts": {
-    "build": "./scripts/generate-html/index.js"
+    "index": "./scripts/generate-html/index.js",
+    "new": "./scripts/new-presentation/index.js"
   },
   "dependencies": {
+    "fs-extra": "^3.0.1",
+    "handlebars": "^4.0.10",
+    "inquirer": "^3.0.6",
     "reveal.js": "^3.5.0"
-  },
-  "devDependencies": {
-    "handlebars": "^4.0.10"
   }
 }
