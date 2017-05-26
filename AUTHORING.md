@@ -1,4 +1,4 @@
-# Content authoring
+# Content Authoring Guide
 
 ## Workflow
 
@@ -7,7 +7,8 @@
 3. Run `npm run new` to start the wizard for new presentations.
 4. You can always change the information you provided by editing `info.json` or renaming the presentation folder.
 5. Author your presentation in your newly created presentation folder.
-6. After any changes, run `npm run index` to update `index.html` of the root of this repository to include all
+6. After any changes, run `npm run index` to ensure all presentations and their information are up to date in
+   the list on `/index.html`.
 
 
 ## Structure and Syntax
